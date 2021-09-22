@@ -1,6 +1,16 @@
+import "./App.css";
+import Footer from "./components/footer";
+import Home from "./components/Home/home";
+import Navbar from "./components/Navbar/navbar";
+
 let App = () => {
-  return <></>;
+  return (
+    <>
+      <Navbar />
+      <Home />
+      <Footer />
+    </>
+  );
 };
 
-
-export const App;
+export default App;

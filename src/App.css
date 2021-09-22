@@ -1,0 +1,9 @@
+:root{
+    --primary-font : 'Source Sans Pro', sans-serif; /* applied styles 200, 300, 400 */
+    --primary-color : #FAFDFD;
+    --inset-box-shadow : rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset, rgb(204, 219, 232) -3px -3px 6px 0px inset, rgba(255, 255, 255, 0.5) 3px 3px 6px 1px inset;
+    --outer-shadow :  rgba(50, 50, 93, 0.25) 0px 10px 20px -4px,
+    rgba(0, 0, 0, 0.3) 0px 7.5px 15px -7.5px,
+    rgba(10, 37, 64, 0.35) 0px -0.5px 1.5px 0px inset;
+}
+
