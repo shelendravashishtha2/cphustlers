@@ -63,7 +63,7 @@ let Home = () => {
     {
       ques: "Hello World",
       comp: "Amazon",
-      algo: "Console Output",
+      algo: "Console Output Console Output Console OutputConsole OutputConsole OutputConsole Output",
     },{
       ques: "Hello World",
       comp: "Amazon",
