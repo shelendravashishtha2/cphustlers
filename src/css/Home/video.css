@@ -1,0 +1,6 @@
+.home-video{
+    height: 50vh;
+    width: 85%;
+    border-radius: 15px;
+    box-shadow: var(--outer-shadow);
+}
