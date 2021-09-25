@@ -5,10 +5,9 @@
   width: 85%;
   border-radius: 15px;
   transition: 1s;
-}
-
-.home-video:hover {
-  box-shadow: var(--outer-shadow);
+  box-shadow: inset 6px 6px 8px rgb(255 255 255 / 50%),
+    inset -4px -4px 15px rgb(0 0 0 / 10%), 5px 5px 15px rgb(255 255 255 / 50%),
+    -5px -5px 15px rgb(0 0 0 / 10%);
 }
 
 .vid-pl-head {

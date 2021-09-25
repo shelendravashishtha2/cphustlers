@@ -33,10 +33,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
-    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset,
-    rgb(204, 219, 232) -3px -3px 6px 0px inset,
-    rgba(255, 255, 255, 0.5) 3px 3px 6px 1px inset;
+  box-shadow: inset 6px 6px 8px rgb(255 255 255 / 50%),
+    inset -4px -4px 15px rgb(0 0 0 / 10%), 5px 5px 15px rgb(255 255 255 / 50%),
+    -5px -5px 15px rgb(0 0 0 / 10%);
 }
 
 .sorting .dropdown select {
