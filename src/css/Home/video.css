@@ -1,6 +1,40 @@
-.home-video{
-    height: 50vh;
-    width: 85%;
-    border-radius: 15px;
-    box-shadow: var(--outer-shadow);
+.home-video {
+  flex: 0 450px;
+  max-height: 450px;
+  margin-top: 10px;
+  width: 85%;
+  border-radius: 15px;
+  transition: 1s;
+}
+
+.home-video:hover {
+  box-shadow: var(--outer-shadow);
+}
+
+.vid-pl-head {
+  height: 50px;
+  display: flex;
+  background: #2d3436;
+  color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.vid-pl-head .srno {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vid-pl-head .video-link {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-card-container {
+  height: 400px;
+  overflow-y: scroll;
 }

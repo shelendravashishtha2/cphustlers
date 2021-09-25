@@ -1,33 +1,35 @@
 .home {
-  background: var(--primary-color);
-  min-height: calc(100vh - 60px);
-  height: calc(100vh - 60px);
+  background: #eaebeb;
   display: flex;
 }
 
 .home-main {
   width: 60%;
+  min-height: 100vh;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
 }
 
 .sorting {
-  min-height: 8vh;
-  height: fit-content;
-  width: 85%;
+  width: 95%;
+  flex: 0 63px;
+  margin: 20px 0;
+  background: var(--primary-color);
   display: flex;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 5px 10px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3.25px 7.5px -3.25px,
-    rgba(10, 37, 64, 0.35) 0px -0.25px 0.75px 0px inset;
-  align-items: center;
   justify-content: space-around;
+  align-items: center;
+  transition: 1s;
+}
+
+.sorting:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .sorting .dropdown {
   width: 60%;
-  height: 80%;
+  height: 49px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,20 +69,17 @@
 }
 
 .questions {
-  height: 70vh;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  width: 85%;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 10px 20px -4px,
-    rgba(0, 0, 0, 0.3) 0px 7.5px 15px -7.5px,
-    rgba(10, 37, 64, 0.35) 0px -0.5px 1.5px 0px inset;
+  margin: 10px 0;
+  flex: 0 578px;
+  width: 95%;
+  overflow-y: scroll;
 }
 
 .home-sidebar {
+  min-height: 100vh;
   width: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
 }
 
@@ -97,6 +96,7 @@
 .ques-main {
   height: 65vh;
   overflow: scroll;
+  background: var(--primary-color);
 }
 
 .ques-head .hp {
