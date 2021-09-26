@@ -1,0 +1,67 @@
+.editor_container {
+  height: 100%;
+  width: 100%;
+  position: relative !important;
+
+  overflow: hidden; // Issuse with this
+
+  .editor_header {
+    padding: 8px;
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+
+    .header_buttons {
+      display: flex;
+    }
+  }
+
+  .editor_wrap {
+    font-family: monospace !important;
+    * {
+      font-family: inherit !important;
+    }
+  }
+
+  .ace_editor {
+    height: calc(100vh - 64px - 70px - 40px) !important;
+
+    .ace_scrollbar::-webkit-scrollbar {
+      width: 0.5em;
+      height: 0.4em;
+    }
+    .ace_scrollbar::-webkit-scrollbar,
+    .ace_scrollbar::-webkit-scrollbar-thumb {
+      overflow: visible;
+      border-radius: 4px;
+    }
+    .ace_scrollbar::-webkit-scrollbar-thumb {
+      background-color: transparent;
+    }
+    .ace_scrollbar:hover::-webkit-scrollbar-thumb {
+      background: rgba(151, 150, 150, 0.658);
+    }
+  }
+}
+
+.editor_full {
+  z-index: 1200;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  .ace_editor {
+    height: calc(100vh - 64px) !important;
+  }
+}
+
+.sidebarOpenEditor {
+  left: -62.8vw !important;
+}
+
+.ace_gutter-cell {
+    color: #aaa;
+    width: 100%;
+}
