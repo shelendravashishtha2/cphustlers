@@ -2,9 +2,6 @@
   height: 100%;
   width: 100%;
   position: relative !important;
-
-  overflow: hidden; // Issuse with this
-
   .editor_header {
     padding: 8px;
     display: flex;
@@ -18,6 +15,7 @@
   }
 
   .editor_wrap {
+    height: 100%;
     font-family: monospace !important;
     * {
       font-family: inherit !important;
@@ -25,8 +23,7 @@
   }
 
   .ace_editor {
-    height: calc(100vh - 64px - 70px - 40px) !important;
-
+    height: 100% !important;
     .ace_scrollbar::-webkit-scrollbar {
       width: 0.5em;
       height: 0.4em;

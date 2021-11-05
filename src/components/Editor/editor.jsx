@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./editor.scss";
-
+import "axios";
 import AceEditor from "react-ace";
 import "ace-builds/src-min-noconflict/ext-searchbox";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-jsx";
 import { langs, themes } from "./constants";
+import axios from "axios";
 // import EditorHeader from "./header";
 // import { debounce, isJsonString } from "../../../Utils/utils";
 // import EditorFooter from "./footer";
@@ -15,7 +16,7 @@ langs.forEach((lang) => {
 });
 themes.forEach((theme) => require(`ace-builds/src-noconflict/theme-${theme}`));
 
-function Editor({
+const Editor = ({
   showHeader = true,
   data,
   uuid,
@@ -26,7 +27,7 @@ function Editor({
   isNavBar,
   contestId,
   batchId,
-}) {
+}) => {
   const [code, setCode] = useState(`import java.io.*;
   import java.util.*;
   
@@ -39,11 +40,29 @@ function Editor({
   }`);
   console.log(code);
   const [lang, setLang] = useState(langs[0]);
-  const [theme, setTheme] = useState(themes[0]);
+  const [theme, setTheme] = useState(themes[3]);
   const [fontSize, setFontSize] = useState(16);
   const [fullScreen, setFullScreen] = useState(false);
   const contestEditorRef = useRef();
-
+  const [dataOut, setDataOut] = useState(null);
+  const clickHandle = async () => {
+    const ClientID = "3fb4c3c2b9e2c9aaed4b4cdf9041e75c";
+    const ClientSecret =
+      "7edf0dc08a1d0e85f73b87b4c01dc6445f3a9867d860e2425da34e271be1eab0";
+    console.log(code.trim());
+    let data = await axios.post("/execute", {
+      script: code.trim(),
+      language: "java",
+      versionIndex: "0",
+      stdin: `3 3
+      0 0 0
+      1 0 1
+      0 0 0`,
+      clientId: ClientID,
+      clientSecret: ClientSecret,
+    });
+    setDataOut(data);
+  };
   const handleEscape = (e) => {
     if (e.key == "Escape") {
       setFullScreen(false);
@@ -128,9 +147,22 @@ function Editor({
             }}
           />
         </div>
+
+        {/* <button onClick={clickHandle}>Submit</button>
+        <div
+          style={{
+            boxShadow: "inset 0px 2px 15px 0px #000",
+            width: "100vw",
+            overflow: "scroll",
+          }}
+        >
+          <code>
+            <pre>{JSON.stringify(dataOut, null, 2)}</pre>
+          </code>
+        </div> */}
       </div>
     </>
   );
-}
+};
 
 export default Editor;
