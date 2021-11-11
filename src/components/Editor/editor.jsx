@@ -40,7 +40,7 @@ const Editor = ({
   }`);
   console.log(code);
   const [lang, setLang] = useState(langs[0]);
-  const [theme, setTheme] = useState(themes[3]);
+  const [theme, setTheme] = useState(themes[5]);
   const [fontSize, setFontSize] = useState(16);
   const [fullScreen, setFullScreen] = useState(false);
   const contestEditorRef = useRef();
@@ -148,7 +148,7 @@ const Editor = ({
           />
         </div>
 
-        {/* <button onClick={clickHandle}>Submit</button>
+        <button onClick={clickHandle}>Submit</button>
         <div
           style={{
             boxShadow: "inset 0px 2px 15px 0px #000",
@@ -159,7 +159,7 @@ const Editor = ({
           <code>
             <pre>{JSON.stringify(dataOut, null, 2)}</pre>
           </code>
-        </div> */}
+        </div>
       </div>
     </>
   );

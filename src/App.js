@@ -14,7 +14,7 @@ const useStyle = makeStyles({
   detail: {
     height: "100%",
     width: "47%",
-    background: "#000",
+    background: "#F5F7F7",
   },
   editor: {
     height: "100%",
