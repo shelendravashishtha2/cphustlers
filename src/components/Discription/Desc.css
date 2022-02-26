@@ -1,0 +1,24 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.problem{
+    /* font-family: var(--font-family-primary); */
+    /* text-shadow: none; */
+    /* font-weight: lighter; */
+    font-size: 14px;
+    padding: 0px 30px;
+}
+.problem-disc{
+    background-color: white;
+}
+p{
+    line-height: 2;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+span{
+    font-size:"100%"; 
+    display:"inline-block";
+}

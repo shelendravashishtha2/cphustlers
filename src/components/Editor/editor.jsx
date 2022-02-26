@@ -148,18 +148,18 @@ const Editor = ({
           />
         </div>
 
-        <button onClick={clickHandle}>Submit</button>
-        <div
+        {/* <button onClick={clickHandle}>Submit</button> */}
+        {/* <div
           style={{
             boxShadow: "inset 0px 2px 15px 0px #000",
             width: "100vw",
             overflow: "scroll",
           }}
-        >
-          <code>
+        > */}
+          {/* <code>
             <pre>{JSON.stringify(dataOut, null, 2)}</pre>
           </code>
-        </div>
+        </div> */}
       </div>
     </>
   );

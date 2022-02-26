@@ -2,6 +2,7 @@ import { Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import "./App.css";
+import Discription from "./components/Discription/Discription";
 import Editor from "./components/Editor/editor";
 import Nav from "./components/Navbar/nav";
 import { theme } from "./theme/theme";
@@ -27,7 +28,7 @@ let App = () => {
   return (
     <>
       <Box className={styles.container}>
-        <Box className={styles.detail}></Box>
+        <Box className={styles.detail}><Discription/></Box>
         <Box className={styles.editor}>
           <Editor />
         </Box>
