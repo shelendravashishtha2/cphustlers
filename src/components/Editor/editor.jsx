@@ -30,20 +30,30 @@ const Editor = ({
 }) => {
   const [code, setCode] = useState(`import java.io.*;
   import java.util.*;
-  
+
   public class Main{
-              
+
       public static void main(String[] args) throws Exception {
           // write your code here
       }
-              
+
   }`);
+  //   const [code, setCode] = useState(`using System;
+
+  // public class Program
+  // {
+  // 	public static void Main()
+  // 	{
+  // 		Console.WriteLine("Hello World");
+  // 	}
+  // }`);
   console.log(code);
   const [lang, setLang] = useState(langs[0]);
-  const [theme, setTheme] = useState(themes[5]);
+  const [theme, setTheme] = useState(themes[3]);
   const [fontSize, setFontSize] = useState(16);
   const [fullScreen, setFullScreen] = useState(false);
   const contestEditorRef = useRef();
+  const [inputExt, setInputExt] = useState("");
   const [dataOut, setDataOut] = useState(null);
   const clickHandle = async () => {
     const ClientID = "3fb4c3c2b9e2c9aaed4b4cdf9041e75c";
@@ -54,10 +64,9 @@ const Editor = ({
       script: code.trim(),
       language: "java",
       versionIndex: "0",
-      stdin: `3 3
-      0 0 0
-      1 0 1
-      0 0 0`,
+      // language: "csharp",
+      // versionIndex: "4",
+      stdin: inputExt,
       clientId: ClientID,
       clientSecret: ClientSecret,
     });
@@ -125,10 +134,7 @@ const Editor = ({
             theme={theme}
             name="code-editor"
             // onChange={debounce(updateCode, 400)}
-            onChange={(e) => {
-              setCode(e);
-              console.log(code);
-            }}
+            onChange={(e) => setCode(e)}
             fontSize={fontSize}
             showPrintMargin={true}
             showGutter={true}
@@ -149,15 +155,29 @@ const Editor = ({
         </div>
 
         <button onClick={clickHandle}>Submit</button>
+        <div>
+          <textarea
+            rows="4"
+            value={inputExt}
+            onChange={(e) => setInputExt(e.target.value)}
+          ></textarea>
+        </div>
         <div
           style={{
             boxShadow: "inset 0px 2px 15px 0px #000",
-            width: "100vw",
+            width: "fit-content",
             overflow: "scroll",
           }}
         >
           <code>
-            <pre>{JSON.stringify(dataOut, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(dataOut, null, 2)}</pre> */}
+            <pre
+              style={{
+                margin: "5px",
+              }}
+            >
+              {dataOut ? dataOut.data.output : "No Output"}
+            </pre>
           </code>
         </div>
       </div>
