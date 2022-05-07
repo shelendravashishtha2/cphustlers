@@ -1,5 +1,5 @@
 .editor_container {
-  height: 100%;
+  height:  calc(100% - 80px);;
   width: 100%;
   position: relative !important;
   .editor_header {
@@ -61,4 +61,38 @@
 .ace_gutter-cell {
     color: #aaa;
     width: 100%;
+}
+
+.submit-code-btn,.run-code-btn{
+  margin-top: 10px;
+  height: 40px;
+  float: end;
+  width: 100px;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  outline: none;
+  background: rgb(217, 79, 79);
+}
+.submit-code-btn{
+  margin-right: 10px;
+}
+
+.submit-btn-container{
+  display: flex;
+  padding : 0 14px;
+  justify-content: end;
+}
+
+textarea{
+  resize: none;
+  width: 100%;
+  padding : 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+textarea:focus-visible{
+  outline: none;
+  border: 0px ;
 }

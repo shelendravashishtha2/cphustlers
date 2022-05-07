@@ -5,7 +5,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-min-noconflict/ext-searchbox";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-jsx";
-import { langs, themes } from "./constants";
+import { langs, languages, themes } from "./constants";
 import axios from "axios";
 // import EditorHeader from "./header";
 // import { debounce, isJsonString } from "../../../Utils/utils";
@@ -26,34 +26,26 @@ const Editor = ({
   readOnlyMode = false,
   isNavBar,
   contestId,
+  resetCodeVar,
+  checkResultStatus,
   batchId,
+  languagecode,
+  themecode,
+  codevar,
+  question,
 }) => {
-  const [code, setCode] = useState(`import java.io.*;
-  import java.util.*;
+  const [code, setCode] = useState(languages[languagecode].startupcode);
 
-  public class Main{
-
-      public static void main(String[] args) throws Exception {
-          // write your code here
-      }
-
-  }`);
-  //   const [code, setCode] = useState(`using System;
-
-  // public class Program
-  // {
-  // 	public static void Main()
-  // 	{
-  // 		Console.WriteLine("Hello World");
-  // 	}
-  // }`);
   console.log(code);
   const [lang, setLang] = useState(langs[0]);
-  const [theme, setTheme] = useState(themes[3]);
+  const [theme, setTheme] = useState(themecode);
   const [fontSize, setFontSize] = useState(16);
   const [fullScreen, setFullScreen] = useState(false);
   const contestEditorRef = useRef();
   const [inputExt, setInputExt] = useState("");
+  const [compileInput, setComplieInput] = useState(
+    question.sample_test_case_input
+  );
   const [dataOut, setDataOut] = useState(null);
   const clickHandle = async () => {
     const ClientID = "3fb4c3c2b9e2c9aaed4b4cdf9041e75c";
@@ -62,8 +54,27 @@ const Editor = ({
     console.log(code.trim());
     let data = await axios.post("/execute", {
       script: code.trim(),
-      language: "java",
-      versionIndex: "0",
+      language: languages[languagecode].language,
+      versionIndex: languages[languagecode].versionIndex,
+      // language: "csharp",
+      // versionIndex: "4",
+      stdin: compileInput,
+      clientId: ClientID,
+      clientSecret: ClientSecret,
+    });
+    setDataOut(data);
+    checkResultStatus(data.data.output, code.trim());
+  };
+
+  const clickRunHandle = async () => {
+    const ClientID = "3fb4c3c2b9e2c9aaed4b4cdf9041e75c";
+    const ClientSecret =
+      "7edf0dc08a1d0e85f73b87b4c01dc6445f3a9867d860e2425da34e271be1eab0";
+    console.log(code.trim());
+    let data = await axios.post("/execute", {
+      script: code.trim(),
+      language: languages[languagecode].language,
+      versionIndex: languages[languagecode].versionIndex,
       // language: "csharp",
       // versionIndex: "4",
       stdin: inputExt,
@@ -72,12 +83,20 @@ const Editor = ({
     });
     setDataOut(data);
   };
+
   const handleEscape = (e) => {
     if (e.key == "Escape") {
       setFullScreen(false);
     }
   };
 
+  useEffect(() => {
+    setCode(languages[languagecode].startupcode);
+    setTheme(themecode);
+    if (codevar) {
+      setCode(codevar);
+    }
+  }, [languagecode, themecode, codevar]);
   return (
     <>
       <div
@@ -134,7 +153,10 @@ const Editor = ({
             theme={theme}
             name="code-editor"
             // onChange={debounce(updateCode, 400)}
-            onChange={(e) => setCode(e)}
+            onChange={(e) => {
+              resetCodeVar();
+              setCode(e);
+            }}
             fontSize={fontSize}
             showPrintMargin={true}
             showGutter={true}
@@ -153,19 +175,29 @@ const Editor = ({
             }}
           />
         </div>
-
-        <button onClick={clickHandle}>Submit</button>
+        <div className="submit-btn-container">
+          {" "}
+          <button className="submit-code-btn" onClick={clickHandle}>
+            Submit
+          </button>
+          <button className="run-code-btn" onClick={clickRunHandle}>
+            Run
+          </button>
+        </div>
         <div>
           <textarea
             rows="4"
             value={inputExt}
+            placeholder={"enter custom input here..."}
             onChange={(e) => setInputExt(e.target.value)}
           ></textarea>
         </div>
         <div
           style={{
             boxShadow: "inset 0px 2px 15px 0px #000",
-            width: "fit-content",
+            width: "100%",
+            padding: "14px",
+            marginBottom: "20px",
             overflow: "scroll",
           }}
         >

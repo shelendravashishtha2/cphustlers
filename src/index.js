@@ -1,7 +1,14 @@
-import { ThemeProvider } from "@material-ui/styles";
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { applyMiddleware, createStore } from "redux";
 import App from "./App";
-import { theme } from "./theme/theme";
+import userReducer from "./Redux/userReducer";
+let myStore = createStore(userReducer);
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={myStore}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
