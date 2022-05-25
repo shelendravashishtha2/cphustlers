@@ -28,7 +28,7 @@ let Intro = () => {
   useEffect(() => {
     fetchUser();
     fetchQuestions();
-  });
+  }, []);
   return (
     <>
       <div className="user-home-details-con">
