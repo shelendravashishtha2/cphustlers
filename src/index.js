@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
+import { createStore } from "redux";
 import App from "./App";
 import userReducer from "./Redux/userReducer";
 let myStore = createStore(userReducer);

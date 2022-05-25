@@ -1,13 +1,10 @@
 import Editor from "../Editor/editor";
-import { theme } from "../../theme/theme";
-import { Container, Tab, Tabs, Typography } from "@mui/material";
-import { blue } from "@mui/material/colors";
-import { makeStyles } from "@mui/styles";
-import { useEffect, useState } from "react";
-import { Box, MenuItem, OutlinedInput, Select } from "@material-ui/core";
+import {  Tab, Tabs } from "@mui/material";
+import { useState } from "react";
+import { Box, MenuItem, Select } from "@material-ui/core";
 import { Navigate, useLocation } from "react-router";
 import "../styles/Questions/Question.css";
-import { themes } from "../Editor/constants";
+import { langChangeCause, languages, themes } from "../Editor/constants";
 import { useSelector } from "react-redux";
 import QuestionModal from "./QuestionDialog";
 import axios from "axios";
@@ -36,6 +33,10 @@ let Question = () => {
   const [code, setCode] = useState("");
   const [statusCode, setStatusCode] = useState("");
   const [submission, setSubmission] = useState([]);
+  const [langchangecause, setLangChangeCause] = useState(
+    langChangeCause.dropdown
+  );
+
   const checkResultStatus = async (joodleRes, code) => {
     let status = "";
     if (
@@ -56,6 +57,7 @@ let Question = () => {
           submit_code: code,
           ex_status: status,
           points: locState.state.points,
+          language_code: langCode,
         }
       );
       console.log(postSubmission.data);
@@ -97,9 +99,6 @@ let Question = () => {
     }, 2000);
   };
 
-  useEffect(() => {
-    let str = "System\n";
-  }, []);
   console.log(locState);
   return locState.state ? (
     <>
@@ -134,6 +133,7 @@ let Question = () => {
               <thead>
                 <tr>
                   <th scope="col">Sr. No.</th>
+                  <th scope="col">Language</th>
                   <th scope="col">Status</th>
                   <th scope="col">Extract Code</th>
                 </tr>
@@ -143,11 +143,17 @@ let Question = () => {
                   return (
                     <tr key={idx}>
                       <th scope="row">{idx + 1}</th>
+                      <th scope="row" style={{ textTransform: "capitalize" }}>
+                        {/* {el.language_code} */}
+                        {languages[el.language_code].language}
+                      </th>
                       <td>{el.ex_status}</td>
                       <td>
                         <div
                           onClick={() => {
                             setCode(el.submit_code);
+                            setLangChangeCause(langChangeCause.submission);
+                            setLangCode(el.language_code);
                           }}
                           className="paste-code"
                         >
@@ -168,7 +174,10 @@ let Question = () => {
               id="demo-simple-select"
               value={langCode}
               label="java-2"
-              onChange={(e) => setLangCode(e.target.value)}
+              onChange={(e) => {
+                setLangCode(e.target.value);
+                setLangChangeCause(langChangeCause.dropdown);
+              }}
             >
               <MenuItem value={"java-2"}>Java - 10.0.1</MenuItem>
               <MenuItem value={"c-3"}>C - GCC 8.1.0</MenuItem>
@@ -193,6 +202,7 @@ let Question = () => {
             themecode={theme}
             resetCodeVar={resetCodeVar}
             question={locState.state}
+            languageChangeCause={langchangecause}
             checkResultStatus={checkResultStatus}
           />
         </div>

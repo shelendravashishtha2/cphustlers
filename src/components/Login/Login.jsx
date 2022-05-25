@@ -1,15 +1,13 @@
-import { InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router";
 import { useToasts } from "react-toast-notifications";
-import { auth, firestore } from "../../firebase/firebase";
+import { auth } from "../../firebase/firebase";
 
 let Login = () => {
   let history = useNavigate();
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  let [userType, setUserType] = useState("");
   let { addToast } = useToasts();
   let user = useSelector((state) => state);
 

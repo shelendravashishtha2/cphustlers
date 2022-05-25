@@ -1,5 +1,4 @@
 import { Dialog, DialogContent } from "@material-ui/core";
-import { Modal } from "@mui/material";
 
 let QuestionModal = ({ status, open }) => {
   return (

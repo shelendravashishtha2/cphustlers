@@ -1,9 +1,8 @@
-import { padding } from "@mui/system";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router";
 import { useToasts } from "react-toast-notifications";
-import { auth, firestore } from "../../firebase/firebase";
+import { auth } from "../../firebase/firebase";
 import axios from "axios";
 
 let Signup = () => {
@@ -60,7 +59,9 @@ let Signup = () => {
       {user ? <Navigate to="/" /> : ""}
       <div className="row">
         <div className="col-4 offset-4">
-          <h1 style={{color : "white"}} className="mt-4 mb-4">Sign Up</h1>
+          <h1 style={{ color: "white" }} className="mt-4 mb-4">
+            Sign Up
+          </h1>
           <form className="mt-4">
             <div className="mb-3">
               <label htmlFor="exampleInputEmail1" className="form-label">
@@ -135,14 +136,11 @@ let Signup = () => {
                         password
                       );
                       console.log(user);
-                      let data = await axios.post(
-                        "http://localhost:3001/user/create",
-                        {
-                          email_id: email,
-                          password: password,
-                          name: name,
-                        }
-                      );
+                      await axios.post("http://localhost:3001/user/create", {
+                        email_id: email,
+                        password: password,
+                        name: name,
+                      });
                       addToast("you have been successfully registered", {
                         appearance: "success",
                         autoDismiss: true,

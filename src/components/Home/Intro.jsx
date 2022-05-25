@@ -2,11 +2,9 @@ import "../styles/Home/Intro.css";
 import QuestionHome from "./question";
 import "../../firebase/firebase";
 import { auth } from "../../firebase/firebase";
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 let Intro = () => {
-  let state = useSelector((state) => state);
   let [questions, setQuestion] = useState([]);
   let [user, setUser] = useState(null);
   let fetchQuestions = async () => {
@@ -30,7 +28,7 @@ let Intro = () => {
   useEffect(() => {
     fetchUser();
     fetchQuestions();
-  }, []);
+  });
   return (
     <>
       <div className="user-home-details-con">

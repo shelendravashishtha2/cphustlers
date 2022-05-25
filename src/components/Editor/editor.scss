@@ -81,7 +81,15 @@
 .submit-btn-container{
   display: flex;
   padding : 0 14px;
-  justify-content: end;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.time-taken, .space-taken{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 textarea{

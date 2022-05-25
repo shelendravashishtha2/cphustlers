@@ -5,7 +5,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-min-noconflict/ext-searchbox";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-jsx";
-import { langs, languages, themes } from "./constants";
+import { langChangeCause, langs, languages, themes } from "./constants";
 import axios from "axios";
 // import EditorHeader from "./header";
 // import { debounce, isJsonString } from "../../../Utils/utils";
@@ -31,6 +31,7 @@ const Editor = ({
   batchId,
   languagecode,
   themecode,
+  languageChangeCause,
   codevar,
   question,
 }) => {
@@ -81,11 +82,12 @@ const Editor = ({
       clientId: ClientID,
       clientSecret: ClientSecret,
     });
+    console.log(data);
     setDataOut(data);
   };
 
   const handleEscape = (e) => {
-    if (e.key == "Escape") {
+    if (e.key === "Escape") {
       setFullScreen(false);
     }
   };
@@ -93,10 +95,10 @@ const Editor = ({
   useEffect(() => {
     setCode(languages[languagecode].startupcode);
     setTheme(themecode);
-    if (codevar) {
+    if (codevar && languageChangeCause === langChangeCause.submission) {
       setCode(codevar);
     }
-  }, [languagecode, themecode, codevar]);
+  }, [languagecode, themecode, codevar, languageChangeCause]);
   return (
     <>
       <div
@@ -177,12 +179,30 @@ const Editor = ({
         </div>
         <div className="submit-btn-container">
           {" "}
-          <button className="submit-code-btn" onClick={clickHandle}>
-            Submit
-          </button>
-          <button className="run-code-btn" onClick={clickRunHandle}>
-            Run
-          </button>
+          <div className="time-taken">
+            {dataOut && dataOut.data ? (
+              <span class="material-icons-outlined">timer</span>
+            ) : (
+              ""
+            )}{" "}
+            {dataOut && dataOut.data ? ` ${dataOut.data.cpuTime}` + " s" : ""}
+          </div>
+          <div className="space-taken">
+            {dataOut && dataOut.data ? (
+              <span class="material-icons-outlined">memory</span>
+            ) : (
+              ""
+            )}{" "}
+            {dataOut && dataOut.data ? ` ${dataOut.data.memory}` : ""}
+          </div>
+          <div>
+            <button className="submit-code-btn" onClick={clickHandle}>
+              Submit
+            </button>
+            <button className="run-code-btn" onClick={clickRunHandle}>
+              Run
+            </button>
+          </div>
         </div>
         <div>
           <textarea
@@ -208,7 +228,7 @@ const Editor = ({
                 margin: "5px",
               }}
             >
-              {dataOut ? dataOut.data.output : "No Output"}
+              {dataOut && dataOut.data ? dataOut.data.output : "No Output"}
             </pre>
           </code>
         </div>
