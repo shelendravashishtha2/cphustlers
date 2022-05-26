@@ -4,9 +4,11 @@ import "../../firebase/firebase";
 import { auth } from "../../firebase/firebase";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 let Intro = () => {
   let [questions, setQuestion] = useState([]);
   let [user, setUser] = useState(null);
+  let navigate = useNavigate();
   let fetchQuestions = async () => {
     let data = await axios.get(
       "http://localhost:3001/question/get-all-quesiton"
@@ -59,8 +61,13 @@ let Intro = () => {
             return <QuestionHome key={idx} ques={e} />;
           })}
         </div>
-
-        <div className="user-profile">
+          
+        <div
+          onClick={() => {
+            navigate("/my-profile");
+          }}
+          className="user-profile"
+        >
           <p>Signed In as : </p>
           <p>{auth.currentUser.email}</p>
         </div>

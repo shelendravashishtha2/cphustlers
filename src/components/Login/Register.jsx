@@ -131,16 +131,16 @@ let Signup = () => {
                 if (!checkData())
                   if (password === confirmPassword) {
                     try {
-                      let { user } = await auth.createUserWithEmailAndPassword(
-                        email,
-                        password
-                      );
-                      console.log(user);
                       await axios.post("http://localhost:3001/user/create", {
                         email_id: email,
                         password: password,
                         name: name,
                       });
+                      let { user } = await auth.createUserWithEmailAndPassword(
+                        email,
+                        password
+                      );
+                      console.log(user);
                       addToast("you have been successfully registered", {
                         appearance: "success",
                         autoDismiss: true,

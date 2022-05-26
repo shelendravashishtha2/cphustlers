@@ -10,6 +10,8 @@ import Signup from "./components/Login/Register";
 import Question from "./components/Questions/Question";
 import { auth } from "./firebase/firebase";
 import { userCreator } from "./Redux/userAction";
+import moment from "moment";
+import MyProfile from "./components/MyProfile/MyProfile";
 let App = () => {
   let dispatch = useDispatch();
   let [title, setTitle] = useState("");
@@ -99,6 +101,7 @@ let App = () => {
             <Route path="/question" element={<Question />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/my-profile" element={<MyProfile />} />
           </Routes>
         </ToastProvider>
       </Router>

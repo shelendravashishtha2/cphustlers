@@ -7,7 +7,7 @@ import Nav from "./Nav";
 let Home = () => {
   let state = useSelector((state) => state);
   console.log(state);
-  return auth.currentUser ? (
+  return state ? (
     <>
       <Nav />
       <Intro />
